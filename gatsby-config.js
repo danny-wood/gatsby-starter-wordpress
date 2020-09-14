@@ -1,3 +1,4 @@
+const path = require("path")
 // // Netlify config for deployment previews. TODO: uncomment and set domain name.
 // const {
 //   NODE_ENV,
@@ -11,17 +12,29 @@
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Starter Base`,
+    title: `Gatsby Starter Wordpress`,
     description: `Base Gatsby Project`,
     author: `@danny-wood`,
   },
   plugins: [
+    {
+      resolve: "gatsby-plugin-root-import",
+      options: {
+        src: path.join(__dirname, "src"),
+        assets: path.join(__dirname, "src/assets"),
+        components: path.join(__dirname, "src/components"),
+        enums: path.join(__dirname, "src/enums"),
+        hooks: path.join(__dirname, "src/hooks"),
+        pages: path.join(__dirname, "src/pages"),
+        utils: path.join(__dirname, "src/utils"),
+      },
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/images`,
+        path: `${__dirname}/src/assets`,
       },
     },
     `gatsby-transformer-sharp`,
@@ -35,7 +48,7 @@ module.exports = {
         background_color: `#000000`,
         theme_color: `#000000`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/assets/icons/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-styled-components`,
@@ -89,34 +102,7 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
     //-----------------
-    // Prismic. If sourcing data from Prismic, use the below config,
-    // remember to add any new routes and schemas for custom types.
-    //-----------------
-    // {
-    //   resolve: `gatsby-source-prismic`,
-    //   options: {
-    //     repositoryName: `your-app-name`, // TODO: Change app name
-    //     accessToken: `${process.env.API_KEY}`,
-    //     linkResolver: ({ node, key, value }) => doc => {
-    //       if (doc.type === "page") return "/" + doc.uid // Add routes for custom types
-    //       // Fallback for other types, in case new custom types get created
-    //       return "/doc/" + doc.id
-    //     },
-    //     schemas: {
-    //       page: require("./src/schemas/page.json"), // Add schemas here for custom types
-    //     },
-    //     htmlSerializer: ({ node, key, value }) => (
-    //       type,
-    //       element,
-    //       content,
-    //       children
-    //     ) => {
-    //       // Your HTML serializer
-    //     },
-    //   },
-    // },
-    //-----------------
-    // Sitemap. TODO: Update excluded routes when using xml sitemap
+    // TODO: Sitemap. Update excluded routes when using xml sitemap
     //-----------------
     // {
     //   resolve: `gatsby-plugin-sitemap`,
@@ -130,7 +116,6 @@ module.exports = {
     //             siteUrl
     //           }
     //         }
-
     //         allSitePage {
     //           nodes {
     //             path

@@ -1,22 +1,21 @@
 import React from "react"
 import PropTypes from "prop-types"
 import styled, { createGlobalStyle } from "styled-components"
-import vars from "../../styles/vars"
-import Header from "./Header"
-import Footer from "./Footer"
 import { Container, Row, Col } from "reactstrap"
-//import { Helmet } from "react-helmet"
+import { Helmet } from "react-helmet"
+import styleUtil from "utils/styleUtil"
+import Header from "components/ui/Header"
+import Footer from "components/ui/Footer"
 
 function Layout({ children }) {
   return (
     <LayoutContainer>
-      {/* This is one example of adding Google fonts */}
-      {/* <Helmet>
+      <Helmet>
         <link
           href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
           rel="stylesheet"
         />
-      </Helmet> */}
+      </Helmet>
       <GlobalStyle />
       <Header />
       <main>
@@ -40,8 +39,7 @@ export default Layout
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background-size: contain;
+    font-family: 'Montserrat', sans-serif;;
     font-size: 16px;
     line-height: 1.4;
   }
@@ -61,7 +59,7 @@ const GlobalStyle = createGlobalStyle`
 
   a{
     text-decoration: none;
-    color: ${vars.primary};
+    color: ${styleUtil.primary};
     transition: ease-in-out 200ms;
   }
 
