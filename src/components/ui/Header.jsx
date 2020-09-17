@@ -1,7 +1,7 @@
 import React from "react"
 import { Container, Row, Col } from "reactstrap"
 import styled from "styled-components"
-import styleUtil from "utils/styleUtil"
+import vars from "styles/variables"
 
 function Header() {
   return (
@@ -18,7 +18,7 @@ function Header() {
 export default Header
 
 const StyledHeader = styled.header`
-  background: ${styleUtil.grey_300};
+  background: ${vars.grey_300};
   padding: 1rem 0;
   margin-bottom: 1.5rem;
 `

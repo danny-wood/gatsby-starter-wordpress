@@ -26,6 +26,7 @@ module.exports = {
         enums: path.join(__dirname, "src/enums"),
         hooks: path.join(__dirname, "src/hooks"),
         pages: path.join(__dirname, "src/pages"),
+        styles: path.join(__dirname, "src/styles"),
         utils: path.join(__dirname, "src/utils"),
       },
     },

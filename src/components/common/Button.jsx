@@ -1,7 +1,7 @@
 import React from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { Link } from "gatsby"
-import styleUtil from "utils/styleUtil"
+import vars from "styles/variables"
 import ButtonTypeEnum from "enums/buttonTypeEnum"
 import LoadingIcon from "components/common/LoadingIcon"
 
@@ -53,16 +53,12 @@ const Button = ({
 
 export default Button
 
-const StyledButton = styled(({ styleType, isLoading, ...rest }) => (
-  <button {...rest} />
-))`
-  min-width: 250px;
-  font-weight: 600;
+const ButtonStyle = css`
+  min-width: 230px;
   display: inline-block;
   text-decoration: none;
   padding: ${props => (props.isLoading ? 0 : "15px")};
   border-radius: 50px;
-  font-size: 16px;
   cursor: pointer;
   height: 50px;
   text-align: center;
@@ -73,23 +69,27 @@ const StyledButton = styled(({ styleType, isLoading, ...rest }) => (
       (props.styleType === ButtonTypeEnum.whiteOutline && "2px") || "0"}
     solid
     ${props =>
-      (props.styleType === ButtonTypeEnum.primary && styleUtil.primaryColour) ||
-      (props.styleType === ButtonTypeEnum.secondary &&
-        styleUtil.secondaryColour) ||
-      (props.styleType === ButtonTypeEnum.white && styleUtil.white) ||
-      (props.styleType === ButtonTypeEnum.whiteOutline && styleUtil.white) ||
-      styleUtil.black};
+      (props.styleType === ButtonTypeEnum.primary && vars.primaryColour) ||
+      (props.styleType === ButtonTypeEnum.secondary && vars.secondary) ||
+      (props.styleType === ButtonTypeEnum.white && vars.white) ||
+      (props.styleType === ButtonTypeEnum.whiteOutline && vars.white) ||
+      vars.black};
 
   color: ${props =>
-    (props.styleType === ButtonTypeEnum.primary && styleUtil.white) ||
-    (props.styleType === ButtonTypeEnum.secondary && styleUtil.black) ||
-    (props.styleType === ButtonTypeEnum.white && styleUtil.paleOrange) ||
-    (props.styleType === ButtonTypeEnum.whiteOutline && styleUtil.white) ||
-    styleUtil.black};
+    (props.styleType === ButtonTypeEnum.primary && vars.white) ||
+    (props.styleType === ButtonTypeEnum.secondary && vars.white) ||
+    (props.styleType === ButtonTypeEnum.white && vars.paleOrange) ||
+    (props.styleType === ButtonTypeEnum.whiteOutline && vars.white) ||
+    vars.black};
 
   background: ${props =>
-    (props.styleType === ButtonTypeEnum.primary && styleUtil.primaryGradient) ||
-    (props.styleType === ButtonTypeEnum.secondary &&
-      styleUtil.secondaryColour) ||
-    (props.styleType === ButtonTypeEnum.white && styleUtil.white)};
+    (props.styleType === ButtonTypeEnum.primary && vars.primaryGradient) ||
+    (props.styleType === ButtonTypeEnum.secondary && vars.secondary) ||
+    (props.styleType === ButtonTypeEnum.white && vars.white)};
+`
+
+const StyledButton = styled(({ styleType, isLoading, ...rest }) => (
+  <button {...rest} />
+))`
+  ${ButtonStyle}
 `
