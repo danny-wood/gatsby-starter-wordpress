@@ -9,7 +9,7 @@ const Button = ({
   children,
   isLoading,
   styleType = ButtonTypeEnum.primary,
-  type,
+  type = "button",
   to,
   ...other
 }) => {
@@ -21,6 +21,7 @@ const Button = ({
         type={type}
         isLoading={isLoading}
         disabled={isLoading}
+        {...other}
       >
         {isLoading ? <LoadingIcon /> : children}
       </StyledButton>

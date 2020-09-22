@@ -4,8 +4,17 @@ import { Col, Row } from "reactstrap"
 import { Link } from "gatsby"
 import { MdMenu, MdPersonOutline, MdPhone, MdSearch } from "react-icons/md"
 import ButtonTypeEnum from "./../enums/buttonTypeEnum"
+import { useNav } from "hooks/useNav"
 
 function IndexPage() {
+  const { navState, navDispatch } = useNav()
+
+  const toggleNavState = () => {
+    navDispatch({
+      type: "TOGGLE_MOBILE_NAV",
+    })
+  }
+
   return (
     <Row>
       <Col>
@@ -22,6 +31,10 @@ function IndexPage() {
         <p>
           <em>Italic</em>
         </p>
+        <p>
+          <Button onClick={toggleNavState}>Toggle Nav State</Button>
+        </p>
+        <p>The mobile nav is {navState.mobileNavOpen ? "open" : "closed"}</p>
       </Col>
       <Col>
         <Row>

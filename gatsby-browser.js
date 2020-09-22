@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css"
 import "normalize.css"
 import "bootstrap-4-grid/css/grid.min.css"
 import Layout from "components/ui/layout"
-import NavigationContextProvider from "hooks/useNavigation"
+import { NavProvider } from "hooks/useNav"
 
 toast.configure()
 
@@ -13,5 +13,5 @@ export const wrapPageElement = ({ element, props }) => {
 }
 
 export const wrapRootElement = ({ element }) => {
-  return <NavigationContextProvider>{element}</NavigationContextProvider>
+  return <NavProvider>{element}</NavProvider>
 }
