@@ -2,6 +2,22 @@
   Gatsby Starter Wordpress
 </h1>
 
+You will need a WP site setup and a .env file containing the following variables, these are required env variables, you will also need to setup a 'FullWithText' page moudle in ACF, check the fragments.js file in the graphql folder for the schema
+
+```text
+WP_DOMAIN=cms.your-wp-domain.co.uk
+SITE_DOMAIN=www.your-site-domain.co.uk
+```
+
+Additional env variables, these are not required to run the site, but are required if you plan to use the functionality they are related to.
+
+```text
+GF_CONSUMER_KEY=YOUR_CONSUMER_KEY
+GF_CONSUMER_SECRET=YOUR_CONSUMER_SECRET
+GATSBY_RECAPTCHA_SITE_KEY=YOUR_RECAPTCHA_SITE_KEY
+GTM_CODE=YOUR_GTM_CODE
+```
+
 Kick off your project with this default boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
 
 _Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.org/docs/gatsby-starters/)._

@@ -2,7 +2,7 @@ import React, { useReducer, createContext, useContext } from "react"
 
 const initialState = {
   activeSlug: null,
-  mobileNavOpen: false,
+  navFixed: true,
 }
 
 const navContext = createContext(initialState)
@@ -10,31 +10,53 @@ const { Provider } = navContext
 
 export const useNav = () => {
   const { state: navState, dispatch: navDispatch } = useContext(navContext)
+
+  const closeSubNav = () => {
+    navDispatch({
+      type: "CLOSE_SUBNAV",
+    })
+  }
+
+  const openSubNav = activeSlug => {
+    navDispatch({
+      type: "OPEN_SUBNAV",
+      activeSlug,
+    })
+  }
+
   return {
     navState,
     navDispatch,
+    closeSubNav,
+    openSubNav,
   }
 }
 
 export function NavProvider({ children }) {
   const [state, dispatch] = useReducer((state, action) => {
     switch (action.type) {
-      case "TOGGLE_SUBNAV": {
+      case "OPEN_SUBNAV": {
         return {
           ...state,
-          activeSlug: action.slug,
+          activeSlug: action.activeSlug,
         }
       }
-      case "TOGGLE_MOBILE_NAV": {
+      case "CLOSE_SUBNAV": {
         return {
           ...state,
-          mobileNavOpen: !state.mobileNavOpen,
+          activeSlug: null,
         }
       }
-      case "CLOSE_MOBILE_NAV": {
+      case "FIX_NAV": {
         return {
           ...state,
-          mobileNavOpen: false,
+          navFixed: true,
+        }
+      }
+      case "UNFIX_NAV": {
+        return {
+          ...state,
+          navFixed: false,
         }
       }
       default:

@@ -1,14 +1,16 @@
 import React from "react"
-import { Row, Col } from "reactstrap"
+import { Row, Col, Container } from "reactstrap"
 
 function FullWidthText({ data }) {
   const { content } = data
   return (
-    <Row>
-      <Col>
-        <div dangerouslySetInnerHTML={{ __html: content }} />
-      </Col>
-    </Row>
+    <Container>
+      <Row>
+        <Col className="mb-3">
+          <div dangerouslySetInnerHTML={{ __html: content }} />
+        </Col>
+      </Row>
+    </Container>
   )
 }
 
