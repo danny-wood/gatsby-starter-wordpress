@@ -5,7 +5,7 @@ import "normalize.css"
 import "bootstrap-4-grid/css/grid.min.css"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
-import Layout from "components/ui/layout"
+import Layout from "components/ui/Layout"
 import { NavProvider } from "hooks/useNav"
 import Head from "components/ui/Head"
 
