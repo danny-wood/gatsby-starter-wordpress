@@ -21,31 +21,11 @@ function Page({ data, location }) {
 
 export default Page
 
-export const query = graphql`
-  query($id: String!) {
-    wordpressPage(id: { eq: $id }) {
-      id
-      title
-      excerpt
-      content
-      slug
-      acf {
-        page_hero_slides {
-          ...heroSlides
-        }
-        page_hero_settings {
-          ...heroSettings
-        }
-        modules_page {
-          ...fullWidthText
-        }
-      }
-      yoast_title
-      yoast_meta {
-        name
-        content
-        property
-      }
-    }
-  }
-`
+// export const query = graphql`
+//   query($id: String!) {
+//     wpPage(id: { eq: $id }) {
+//       id
+//       title
+//     }
+//   }
+// `

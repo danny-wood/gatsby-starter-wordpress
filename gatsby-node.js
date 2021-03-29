@@ -16,26 +16,19 @@ exports.createPages = async ({ graphql, actions }) => {
   // from the fetched data that you can run queries against.
   const result = await graphql(`
     {
-      allWordpressPage(filter: { slug: { nin: ["blog"] } }) {
+      allWpPage(filter: { slug: { nin: ["blog"] } }) {
         edges {
           node {
             id
-            path
-            status
-            template
-            slug
+            uri
           }
         }
       }
-      allWordpressPost {
+      allWpPost {
         edges {
           node {
             id
-            status
-            path
-            template
-            slug
-            title
+            uri
           }
         }
       }
@@ -48,7 +41,7 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   // Access query results via object destructuring
-  const { allWordpressPage, allWordpressPost } = result.data
+  const { allWpPage } = result.data
 
   // Create Page pages.
   const pageTemplate = path.resolve(`./src/templates/Page.jsx`)
@@ -56,7 +49,7 @@ exports.createPages = async ({ graphql, actions }) => {
   // The path field contains the relative original WordPress link
   // and we use it for the slug to preserve url structure.
   // The Page ID is prefixed with 'PAGE_'
-  allWordpressPage.edges.forEach(edge => {
+  allWpPage.edges.forEach(edge => {
     // Gatsby uses Redux to manage its internal state.
     // Plugins and sites can use functions like "createPage"
     // to interact with Gatsby.
@@ -65,7 +58,7 @@ exports.createPages = async ({ graphql, actions }) => {
       // as a template component. The `context` is
       // optional but is often necessary so the template
       // can query data specific to each page.
-      path: edge.node.path,
+      path: edge.node.uri,
       component: slash(pageTemplate),
       context: {
         id: edge.node.id,
@@ -73,27 +66,27 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  // Create Post pages.
-  const postTemplate = path.resolve(`./src/templates/Post.jsx`)
-  allWordpressPost.edges.forEach(edge => {
-    createPage({
-      path: edge.node.path,
-      component: slash(postTemplate),
-      context: {
-        id: edge.node.id,
-      },
-    })
-  })
+  // // Create Post pages.
+  // const postTemplate = path.resolve(`./src/templates/Post.jsx`)
+  // allWordpressPost.edges.forEach(edge => {
+  //   createPage({
+  //     path: edge.node.path,
+  //     component: slash(postTemplate),
+  //     context: {
+  //       id: edge.node.id,
+  //     },
+  //   })
+  // })
 
-  const postCategoryTemplate = path.resolve(`./src/templates/PostList.jsx`)
-  const postPrefix = "/blog"
-  const postsPerPage = 6
+  // const postCategoryTemplate = path.resolve(`./src/templates/PostList.jsx`)
+  // const postPrefix = "/blog"
+  // const postsPerPage = 6
 
-  paginate({
-    createPage,
-    items: allWordpressPost.edges,
-    itemsPerPage: postsPerPage,
-    pathPrefix: postPrefix,
-    component: postCategoryTemplate,
-  })
+  // paginate({
+  //   createPage,
+  //   items: allWordpressPost.edges,
+  //   itemsPerPage: postsPerPage,
+  //   pathPrefix: postPrefix,
+  //   component: postCategoryTemplate,
+  // })
 }
